@@ -38,8 +38,8 @@ parser.add_argument("--input", required=True, help="Chemin du fichier CSV d'entr
 args = parser.parse_args()
 
 INPUT_CSV   = Path(args.input)
-CACHE_FILE  = "geocache.json"
-CACHE_NEW   = "geocache_new.json"
+CACHE_FILE  = "outputs/geocache.json"
+CACHE_NEW   = "outputs/geocache_new.json"
 OUTPUT_ROOT = Path("outputs")
 
 # --------------------------------------------------------------------------- #
