@@ -22,7 +22,7 @@ pip install requests tqdm geopy
 Lancer la commande suivante
 
 ```bash
-python csv\_to\_umap\_geojson\_militants.py --input "ListeMilitants.csv"
+python csv_to_umap_geojson_militants.py --input "ListeMilitants.csv"
 ```
 
 ## Arguments
