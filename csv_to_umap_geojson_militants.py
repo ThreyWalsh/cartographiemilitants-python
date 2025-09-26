@@ -109,16 +109,21 @@ problematic_rows  = []
 new_cache_entries = {}
 new_cache_new     = {}
 
-# 👉 Essai automatique du bon séparateur (',' ou ';')
-# On lit la première ligne pour décider
+# Détecter le séparateur
 with open(INPUT_CSV, "r", encoding="utf-8") as f_test:
     first_line = f_test.readline()
 delimiter = ";" if first_line.count(";") > first_line.count(",") else ","
 
+# Compter le nombre de lignes pour tqdm
+with open(INPUT_CSV, newline="", encoding="utf-8") as f_count:
+    total_rows = sum(1 for _ in f_count) - 1  # -1 pour l'en-tête
+
 with open(INPUT_CSV, newline="", encoding="utf-8") as f:
     reader = csv.DictReader(f, delimiter=delimiter)
     headers = reader.fieldnames if reader.fieldnames else []
-    for row in reader:
+
+    # Barre de progression
+    for row in tqdm(reader, total=total_rows, desc="Traitement des adresses", unit="ligne"):
         nom   = clean_text(row.get("Nom", ""))
         addr  = clean_text(row.get("Adresse", ""))
         cp    = clean_text(row.get("Code Postal", ""))
@@ -178,7 +183,7 @@ with open(INPUT_CSV, newline="", encoding="utf-8") as f:
             problematic_rows.append(row)
 
 # --------------------------------------------------------------------------- #
-# ------------------------------ Sauvegardes -------------------------------- #
+# ------------------------------ Sauvegardes ------------------------------ #
 # --------------------------------------------------------------------------- #
 
 # GeoJSON final
@@ -206,5 +211,5 @@ if problematic_rows:
         writer.writeheader()
         writer.writerows(problematic_rows)
 
-print(f"✅ GeoJSON prêt pour uMap : {outdir/'output_umap.geojson'}")
+print(f"\n✅ GeoJSON prêt pour uMap : {outdir/'output_umap.geojson'}")
 print(f"⚠️ Lignes problématiques : {len(problematic_rows)} (voir {outdir/'problematic_rows.csv'})")
