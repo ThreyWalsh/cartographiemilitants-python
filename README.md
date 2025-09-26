@@ -1,3 +1,7 @@
+Initialize readme
+eb702f3
+README.md
+@@ -1,48 +1,233 @@
 # Cartographie militants
 
 
@@ -45,4 +49,3 @@ python csv\_to\_umap\_geojson\_militants.py --input "ListeMilitants.csv"
 | geocache\_new\_added.json | Nouvelles entrées ajoutées au cache cumulatif lors de CE RUN |
 | quality\_report.csv | Statistiques globales |
 | problematic\_rows.csv | Listing de toutes les lignes problématiques |
-
