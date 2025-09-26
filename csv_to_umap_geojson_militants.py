@@ -27,6 +27,7 @@ from pathlib import Path
 from datetime import datetime
 from geopy.geocoders import Nominatim
 from geopy.extra.rate_limiter import RateLimiter
+from tqdm import tqdm
 
 # --------------------------------------------------------------------------- #
 # ---------------------- Paramètres & arguments ----------------------------- #
